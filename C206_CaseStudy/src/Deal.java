@@ -1,14 +1,15 @@
 
 public class Deal {
-	String id;
-	String itemName;
-	String sellerEmail;
-	String buyerEmail;
-	int transPrice;
-	String closeDate;
+	private String id;
+	private String itemName;
+	private String sellerEmail;
+	private String buyerEmail;
+	private double transPrice;
+	private String closeDate;
 
-
-	public Deal (String id, String itemName, String sellerEmail, String buyerEmail, int transPrice, String closeDate) {
+	
+	public Deal(String dealID, String itemName, String sellerName, String buyerName, double transPrice,
+			String closeDate) {
 		this.id = id;
 		this.itemName = itemName;
 		this.sellerEmail = sellerEmail;
@@ -16,6 +17,7 @@ public class Deal {
 		this.transPrice = transPrice;
 		this.closeDate = closeDate;
 	}
+
 	public String getId() {
 		return id;
 	}
@@ -32,7 +34,7 @@ public class Deal {
 		return buyerEmail;
 	}
 
-	public int getTransactionPrice() {
+	public double getTransactionPrice() {
 		return transPrice;
 	}
 

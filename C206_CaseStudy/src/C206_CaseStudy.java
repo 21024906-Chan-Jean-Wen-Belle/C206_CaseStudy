@@ -13,6 +13,8 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 		ArrayList <User> useraccList = new ArrayList<User>();
 		
+		ArrayList<Deal> dealList = new ArrayList<Deal>();
+		
 		int option = 0;
 		
 		while (option != OPTION_QUIT) {
@@ -45,6 +47,14 @@ public class C206_CaseStudy {
 			} else if (option == OPTION_BID) {
 				
 			} else if (option == OPTION_DEAL) {
+				dealSubMenu();
+				
+				int deal_option = Helper.readInt("Enter option for deal> ");
+				if (deal_option == 1) {
+					Deal d = inputDeal();
+					C206_CaseStudy.addDeal(dealList, d);
+					System.out.println("New Deal added!");
+				}
 				
 			}
 		}
@@ -71,7 +81,14 @@ public class C206_CaseStudy {
 		System.out.println("3. Delete User Account");
 		Helper.line(80, "-");
 	}
-
+	private static void dealSubMenu() {
+		C206_CaseStudy.setHeader("USER ACCOUNT");
+		
+		System.out.println("1. Add New Deal");
+		System.out.println("2. Display All Deals");
+		System.out.println("3. Delete Deal based on ID");
+		Helper.line(80, "-");
+	}
 	private static void setHeader(String header) {
 		// TODO Auto-generated method stub
 		Helper.line(80, "-");
@@ -158,6 +175,21 @@ public class C206_CaseStudy {
 			System.out.println("User Account deleted");
 		}
 	}
-	
-	
+	//================================= Option 4 - Deal =================================
+	//input deal
+	private static Deal inputDeal() {
+		String dealID = Helper.readString("Enter ID for deal> ");
+		String itemName = Helper.readString("Enter item name > ");
+		String sellerName = Helper.readString("Enter seller name> ");
+		String buyerName = Helper.readString("Enter buyer name > ");
+		double transPrice = Helper.readDouble("Enter the transaction price > ");
+		String closeDate = Helper.readString("Enter the close date > ");
+		
+		Deal deal = new Deal (dealID, itemName,sellerName, buyerName, transPrice, closeDate);
+		return deal;
+	}
+	// add deal
+	public static void addDeal (ArrayList<Deal> dealList, Deal d) {
+		dealList.add(d);
+	}
 }
