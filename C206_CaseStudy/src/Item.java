@@ -8,9 +8,8 @@ public class Item {
 	private double increment;
 
 	
-	public Item (String name, String description, double bidPrice, 
-			String startDate, String endDate, double increment) {
-		this.name = name;
+	public Item (String name, String description, double bidPrice, String startDate, String endDate, double increment) {
+		this.name = name; 
 		this.description = description;
 		this.bidPrice = bidPrice ;
 		this.startDate = startDate;
