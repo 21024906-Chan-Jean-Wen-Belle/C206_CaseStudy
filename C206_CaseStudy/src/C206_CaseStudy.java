@@ -192,4 +192,60 @@ public class C206_CaseStudy {
 	public static void addDeal (ArrayList<Deal> dealList, Deal d) {
 		dealList.add(d);
 	}
+	// retrieve all deals
+	public static String retrieveAllDeal(ArrayList<Deal> dealList) {
+		String output = "";
+
+		for (int i = 0; i < dealList.size(); i++) {
+			output += String.format("%-10s %-30s %-10s %-10s %-20d %-20s\n", dealList.get(i).getId(),
+					dealList.get(i).getItemName(), 
+					dealList.get(i).getSellerEmail(),
+					dealList.get(i).getBuyerEmail(),dealList.get(i).getTransactionPrice(), dealList.get(i).getCloseDate());
+		}
+		return output;
+	}
+	
+	// view all deals
+	public static void viewAllDeals (ArrayList<Deal> dealList) {
+		C206_CaseStudy.setHeader("DEAL LIST");
+		String output = String.format("%-10s %-30s %-10s %-10s %-20s %-10s\n", "ID", "ITEM NAME",
+				 "SELLER EMAIL", "BUYER EMAIL","TRANSACTION PRICE", "CLOSE DATE");
+		output += retrieveAllDeal(dealList);
+		System.out.println(output);
+	}
+	// find deal if it exist
+	public static boolean doExistDeal(ArrayList<Deal> dealList, String input_dealID) {
+		boolean doExist = false;
+		
+		for (int i = 0; i < dealList.size(); i++) {
+			String dealID = dealList.get(i).getId();
+			
+			if (input_dealID.equals(dealID)) {
+				doExist = true;
+			}
+		}
+		
+		return doExist;
+	}
+	
+	// delete deals
+	public static void deleteDeal(ArrayList<Deal> dealList) {
+	C206_CaseStudy.viewAllDeals(dealList);
+	String input_dealID = Helper.readString("Enter deal ID to delete deal > ");
+	
+	Boolean doExist = doExistDeal(dealList, input_dealID);
+	if (doExist == false) {
+		
+		System.out.println("Invalid User Account");
+	} else {
+		for (int i = 0; i < dealList.size(); i++) {
+			if (input_dealID.equals(dealList.get(i).getId())) {
+				dealList.remove(i);
+			}
+		}
+		System.out.println("Deal deleted");
+		}
+
+	}
 }
+

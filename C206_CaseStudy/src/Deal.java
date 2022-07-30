@@ -8,7 +8,7 @@ public class Deal {
 	private String closeDate;
 
 	
-	public Deal(String dealID, String itemName, String sellerName, String buyerName, double transPrice,
+	public Deal(String dealID, String itemName, String sellerEmail, String buyerEmail, double transPrice,
 			String closeDate) {
 		this.id = id;
 		this.itemName = itemName;
