@@ -105,7 +105,7 @@ public class C206_CaseStudyTest {
 	
 	@Test
 	public void testdoExistDeal () {
-		// Item list is not null, so that can delete deal - boundary
+		// Deal list is not null, so that can delete deal - boundary
 		assertNotNull("Test if there is valid Deal arraylist to delete", dealList);
 		C206_CaseStudy.addDeal(dealList, d1);
 		// Given a list with 2 deal, after deleting 1 deal, the size of the list is 1 - normal

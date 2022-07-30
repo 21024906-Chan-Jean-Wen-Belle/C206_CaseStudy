@@ -63,8 +63,9 @@ public class C206_CaseStudy {
 					viewAllDeals(dealList);
 				} else if (deal_option == 3) {
 					// Delete deals
-					String id = inputDealid();
-					deleteDeal(dealList, id);
+					
+					deleteDeal(dealList);
+					
 				}
 				
 			}
@@ -263,24 +264,19 @@ public class C206_CaseStudy {
 		return doExist;
 	}
 
-	private static String inputDealid() {
-		String dealID = Helper.readString("Enter ID for deal> ");
-		return dealID;
-	}
+
 
 		
 	// delete deal
-	public static void deleteDeal(ArrayList<Deal> dealList, String id) {
-		C206_CaseStudy.viewAllDeals(dealList);
-	
-		
-		Boolean doExist = doExistDeal(dealList, inputDealid());
+	public static void deleteDeal(ArrayList<Deal> dealList) {
+		String dealID = Helper.readString("Enter ID for deal> ");
+		Boolean doExist = doExistDeal(dealList, dealID);
 		if (doExist == false) {
 			
 			System.out.println("Invalid Deal ID");
 		} else {
 			for (int i = 0; i < dealList.size(); i++) {
-				if (inputDealid().equals(dealList.get(i).getId())) {
+				if (dealID.equals(dealList.get(i).getId())) {
 					dealList.remove(i);
 				}
 			}
