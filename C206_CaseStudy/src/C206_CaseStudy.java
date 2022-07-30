@@ -51,13 +51,24 @@ public class C206_CaseStudy {
 				
 				int deal_option = Helper.readInt("Enter option for deal> ");
 				if (deal_option == 1) {
+					// add deals
 					Deal d = inputDeal();
 					C206_CaseStudy.addDeal(dealList, d);
 					System.out.println("New Deal added!");
+			
+				} else if (deal_option == 2) {
+					// View all deals
+					
+					viewAllDeals(dealList);
+				} else if (deal_option == 3) {
+					// Delete deals
+					
+					C206_CaseStudy.deleteDeal(dealList);
 				}
 				
 			}
 		}
+		
 	}
 	
 	public static void menu() {
@@ -180,24 +191,25 @@ public class C206_CaseStudy {
 	private static Deal inputDeal() {
 		String dealID = Helper.readString("Enter ID for deal> ");
 		String itemName = Helper.readString("Enter item name > ");
-		String sellerName = Helper.readString("Enter seller name> ");
-		String buyerName = Helper.readString("Enter buyer name > ");
+		String sellerEmail = Helper.readString("Enter seller name> ");
+		String buyerEmail = Helper.readString("Enter buyer name > ");
 		double transPrice = Helper.readDouble("Enter the transaction price > ");
 		String closeDate = Helper.readString("Enter the close date > ");
 		
-		Deal deal = new Deal (dealID, itemName,sellerName, buyerName, transPrice, closeDate);
+		Deal deal = new Deal (dealID, itemName,sellerEmail, buyerEmail, transPrice, closeDate);
 		return deal;
 	}
 	// add deal
 	public static void addDeal (ArrayList<Deal> dealList, Deal d) {
 		dealList.add(d);
 	}
+	
 	// retrieve all deals
 	public static String retrieveAllDeal(ArrayList<Deal> dealList) {
 		String output = "";
 
 		for (int i = 0; i < dealList.size(); i++) {
-			output += String.format("%-10s %-30s %-10s %-10s %-20d %-20s\n", dealList.get(i).getId(),
+			output += String.format("%-10s %-20s %-30s %-30s %-20d %-20s\n", dealList.get(i).getId(),
 					dealList.get(i).getItemName(), 
 					dealList.get(i).getSellerEmail(),
 					dealList.get(i).getBuyerEmail(),dealList.get(i).getTransactionPrice(), dealList.get(i).getCloseDate());
@@ -208,11 +220,12 @@ public class C206_CaseStudy {
 	// view all deals
 	public static void viewAllDeals (ArrayList<Deal> dealList) {
 		C206_CaseStudy.setHeader("DEAL LIST");
-		String output = String.format("%-10s %-30s %-10s %-10s %-20s %-10s\n", "ID", "ITEM NAME",
+		String output = String.format("%-10s %-20s %-30s %-30s %-20s %-20s\\n", "ID", "ITEM NAME",
 				 "SELLER EMAIL", "BUYER EMAIL","TRANSACTION PRICE", "CLOSE DATE");
 		output += retrieveAllDeal(dealList);
 		System.out.println(output);
 	}
+	
 	// find deal if it exist
 	public static boolean doExistDeal(ArrayList<Deal> dealList, String input_dealID) {
 		boolean doExist = false;
@@ -247,5 +260,6 @@ public class C206_CaseStudy {
 		}
 
 	}
+
 }
 

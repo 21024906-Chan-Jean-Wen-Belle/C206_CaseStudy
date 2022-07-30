@@ -6,9 +6,10 @@ public class Deal {
 	private String buyerEmail;
 	private double transPrice;
 	private String closeDate;
+	private boolean deleted;
 
 	
-	public Deal(String dealID, String itemName, String sellerEmail, String buyerEmail, double transPrice,
+	public Deal(String id, String itemName, String sellerEmail, String buyerEmail, double transPrice,
 			String closeDate) {
 		this.id = id;
 		this.itemName = itemName;
@@ -16,6 +17,7 @@ public class Deal {
 		this.buyerEmail = buyerEmail ;
 		this.transPrice = transPrice;
 		this.closeDate = closeDate;
+		this.deleted = false ;
 	}
 
 	public String getId() {
@@ -40,6 +42,12 @@ public class Deal {
 
 	public String getCloseDate() {
 		return closeDate;
+	}
+
+	public void setIsDeleted(boolean deleted) {
+		this.deleted = deleted ;
+		
+	
 	}
 
 }
