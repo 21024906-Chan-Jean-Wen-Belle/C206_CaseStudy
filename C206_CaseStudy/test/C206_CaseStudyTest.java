@@ -94,7 +94,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that Deal arraylist size is 2", 2, dealList.size());
 		
 		//test if the expected output string same as the list of deal retrieved from the deal list	
-		allDeal= C206_CaseStudy.retrieveAllDeal(dealList);
+		allDeal = C206_CaseStudy.retrieveAllDeal(dealList);
 		testOutput = String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n","D001", "Toy Story 4", "may@gmail.com","sam123@hotmail.com" ,500 , "1 July 2021" );
 		testOutput += String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n","D002", "Chip & Dale CD","sam123@hotmail.com","may@gmail.com" , 30 , "3 March 2021" );
 	
