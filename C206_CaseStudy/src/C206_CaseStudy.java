@@ -1,3 +1,4 @@
+import java.util.AbstractCollection;
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
@@ -58,12 +59,12 @@ public class C206_CaseStudy {
 			
 				} else if (deal_option == 2) {
 					// View all deals
-					
+					retrieveAllDeal(dealList);
 					viewAllDeals(dealList);
 				} else if (deal_option == 3) {
 					// Delete deals
-					
-					C206_CaseStudy.deleteDeal(dealList);
+					String id = inputDealid();
+					deleteDeal(dealList, id);
 				}
 				
 			}
@@ -186,7 +187,28 @@ public class C206_CaseStudy {
 			System.out.println("User Account deleted");
 		}
 	}
-	//================================= Option 4 - Deal =================================
+	//================================= Option 2 - Category =================================
+	
+	
+	
+	
+	
+	
+	//================================= Option 3 - Item =================================
+	
+	
+	
+	
+	
+	
+	//================================= Option 4 - Bid =================================
+	
+	
+	
+	
+	
+	
+	//================================= Option 5 - Deal =================================
 	//input deal
 	private static Deal inputDeal() {
 		String dealID = Helper.readString("Enter ID for deal> ");
@@ -209,7 +231,7 @@ public class C206_CaseStudy {
 		String output = "";
 
 		for (int i = 0; i < dealList.size(); i++) {
-			output += String.format("%-10s %-20s %-30s %-30s %-20d %-20s\n", dealList.get(i).getId(),
+			output += String.format("%-10s %-20s %-30s %-30s %-20.2f %-20s\n", dealList.get(i).getId(),
 					dealList.get(i).getItemName(), 
 					dealList.get(i).getSellerEmail(),
 					dealList.get(i).getBuyerEmail(),dealList.get(i).getTransactionPrice(), dealList.get(i).getCloseDate());
@@ -220,7 +242,7 @@ public class C206_CaseStudy {
 	// view all deals
 	public static void viewAllDeals (ArrayList<Deal> dealList) {
 		C206_CaseStudy.setHeader("DEAL LIST");
-		String output = String.format("%-10s %-20s %-30s %-30s %-20s %-20s\\n", "ID", "ITEM NAME",
+		String output = String.format("%-10s %-20s %-30s %-30s %-20s %-20s\n", "ID", "ITEM NAME",
 				 "SELLER EMAIL", "BUYER EMAIL","TRANSACTION PRICE", "CLOSE DATE");
 		output += retrieveAllDeal(dealList);
 		System.out.println(output);
@@ -232,34 +254,44 @@ public class C206_CaseStudy {
 		
 		for (int i = 0; i < dealList.size(); i++) {
 			String dealID = dealList.get(i).getId();
-			
-			if (input_dealID.equals(dealID)) {
+			if (input_dealID.equals(dealID) ) {
+				dealList.get(i).setIsDeleted(false);
 				doExist = true;
 			}
 		}
 		
 		return doExist;
 	}
-	
-	// delete deals
-	public static void deleteDeal(ArrayList<Deal> dealList) {
-	C206_CaseStudy.viewAllDeals(dealList);
-	String input_dealID = Helper.readString("Enter deal ID to delete deal > ");
-	
-	Boolean doExist = doExistDeal(dealList, input_dealID);
-	if (doExist == false) {
-		
-		System.out.println("Invalid User Account");
-	} else {
-		for (int i = 0; i < dealList.size(); i++) {
-			if (input_dealID.equals(dealList.get(i).getId())) {
-				dealList.remove(i);
-			}
-		}
-		System.out.println("Deal deleted");
-		}
 
+	private static String inputDealid() {
+		String dealID = Helper.readString("Enter ID for deal> ");
+		return dealID;
 	}
 
+		
+	// delete deal
+	public static void deleteDeal(ArrayList<Deal> dealList, String id) {
+		C206_CaseStudy.viewAllDeals(dealList);
+	
+		
+		Boolean doExist = doExistDeal(dealList, inputDealid());
+		if (doExist == false) {
+			
+			System.out.println("Invalid Deal ID");
+		} else {
+			for (int i = 0; i < dealList.size(); i++) {
+				if (inputDealid().equals(dealList.get(i).getId())) {
+					dealList.remove(i);
+				}
+			}
+			System.out.println("Deal deleted");
+		}
+	}
 }
+	
+	
+
+
+
+
 

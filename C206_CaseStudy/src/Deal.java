@@ -40,14 +40,23 @@ public class Deal {
 		return transPrice;
 	}
 
+	public boolean isDeleted() {
+		return deleted;
+	}
+
 	public String getCloseDate() {
 		return closeDate;
 	}
 
 	public void setIsDeleted(boolean deleted) {
 		this.deleted = deleted ;
-		
+	}
+	
+	public String toString() {
+		String dealInfo = String.format("%-10s %-20s %-30s %-30s %-20s %-20s", "ID", "ITEM NAME",
+				 "SELLER EMAIL", "BUYER EMAIL","TRANSACTION PRICE", "CLOSE DATE");
+		return dealInfo;
 	
 	}
-
 }
+
