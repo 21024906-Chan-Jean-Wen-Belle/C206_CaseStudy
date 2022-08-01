@@ -3,89 +3,179 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 	
-	private static final int OPTION_USER = 1;
-	private static final int OPTION_CATEGORY = 2;
-	private static final int OPTION_ITEM = 3;
-	private static final int OPTION_BID = 4;
-	private static final int OPTION_DEAL = 5;
-	private static final int OPTION_QUIT = 6;
+	//private static final int OPTION_USER = 1;
+	private static final int OPTION_CATEGORY = 1;
+	private static final int OPTION_ITEM = 2;
+	private static final int OPTION_BID = 3;
+	private static final int OPTION_DEAL = 4;
+	private static final int OPTION_QUIT = 5;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
 		ArrayList <User> useraccList = new ArrayList<User>();
 		
 		ArrayList<Deal> dealList = new ArrayList<Deal>();
 		
+		ArrayList<Category>catList = new ArrayList<Category>();
+		
+		ArrayList<Item>itemList = new ArrayList<Item>();
+		
+		ArrayList<Bid>bidList = new ArrayList<Bid>();
+	
+	
 		int option = 0;
 		
-		while (option != OPTION_QUIT) {
-			C206_CaseStudy.menu();
-			option = Helper.readInt("Enter an option > ");
-			
-			if (option == OPTION_USER) {
-				userAccSubMenu();
-				
-				int user_option = Helper.readInt("Enter option > ");
-				
-				if (user_option == 1) {
-					// Add new user account
-					
-					User userAccount = inputUserAccount();
-					C206_CaseStudy.addUserAccount(useraccList, userAccount);
-				} else if (user_option == 2) {
-					// View all users
-					
-					viewAllUserAccount(useraccList);
-				} else if (user_option == 3) {
-					// Delete user account
-					
-					C206_CaseStudy.deleteUserAccount(useraccList);
-				}
-			} else if (option == OPTION_CATEGORY) {
-			
-			} else if (option == OPTION_ITEM) {
-				
-			} else if (option == OPTION_BID) {
-				
-			} else if (option == OPTION_DEAL) {
-				dealSubMenu();
-				
-				int deal_option = Helper.readInt("Enter option for deal> ");
-				if (deal_option == 1) {
-					// add deals
-					Deal d = inputDeal();
-					C206_CaseStudy.addDeal(dealList, d);
-					System.out.println("New Deal added!");
-			
-				} else if (deal_option == 2) {
-					// View all deals
-					retrieveAllDeal(dealList);
-					viewAllDeals(dealList);
-				} else if (deal_option == 3) {
-					// Delete deals
-					
-					deleteDeal(dealList);
-					
-				}
+		int y_option = 0;
+		
+		while (option != 4) {
+			C206_CaseStudy.mainMenu();
+			y_option = Helper.readInt("Enter option number > ");
+		
+			if (y_option == 1) {
+				User userAccount = inputUserAccount();
+				C206_CaseStudy.addUserAccount(useraccList, userAccount);
 				
 			}
+			else if (y_option == 2) {
+				String email = Helper.readString("Enter email > ");
+				String password = Helper.readString("Enter password > ");
+				
+				for (int i = 0; i < useraccList.size(); i++) {
+					
+					if (email.matches(useraccList.get(i).getEmail()) && password.matches(useraccList.get(i).getPassword()) ) {
+						if (useraccList.get(i).getRole().equals("Seller")) {
+							C206_CaseStudy.sellerMenu();
+							int s_option = Helper.readInt("Enter option number > ");
+							
+							if (option == 1) {
+								itemSubMenu();
+								int item_option= Helper.readInt("Enter option for item > ");
+								
+								if (item_option == 1) {
+								// add item
+									
+								}
+								else if (item_option == 2) {
+								// view all items
+								
+								}
+								else if (item_option == 3) {
+								// delete item based on name
+								}
+											
+							} else if (option == 2) {
+								bidSubMenu();
+											
+								int bid_option = Helper.readInt("Enter option for bid > ");
+											
+								if (bid_option == 1) {
+									
+								}
+								else if (bid_option == 2) {
+								// view all bids
+											
+								}
+								else if (bid_option == 3) {
+								// delete bid based on id
+								}
+							}
+						}
+					}
+					else if (useraccList.get(i).getRole().equals( "Buyer")) {	
+						C206_CaseStudy.buyerMenu();
+								
+						int b_option = Helper.readInt ("Enter option number >");
+								
+						if (option == 1) {
+							catSubMenu();
+									
+							int cat_option = Helper.readInt("Enter option for category > ");
+								
+							if (cat_option == 1) {
+							// add cat
+							
+							}
+												
+							else if (cat_option == 2) {
+							// view all cat
+							}
+								
+							else if (cat_option == 3) {
+							//delete cat based on name
+							
+							}
+						
+								
+						} else if (option == 2) {
+							dealSubMenu();			
+							int deal_option = Helper.readInt("Enter option for deal> ");
+								
+							if (deal_option == 1) {
+							// add deals
+								Deal d = inputDeal();
+								C206_CaseStudy.addDeal(dealList, d);
+								System.out.println("New Deal added!");
+										
+							} else if (deal_option == 2) {
+							// View all deals
+								retrieveAllDeal(dealList);
+								viewAllDeals(dealList);
+									
+							} else if (deal_option == 3) {
+							// Delete deals
+								deleteDeal(dealList);
+								}
+							}
+						}
+					}
+				}
+				
+			
+			 else if (y_option == 3) {
+				System.out.println("Thank you for using CAMPUS ONLINE AUCTION SHOP !");
+			}
+		
 		}
+	}
+
+
+	
+		
+
+	public static void sellerMenu() {
+		C206_CaseStudy.setHeader("Seller Menu");
+		System.out.println("1. Item");
+		System.out.println("2. Bid");
 		
 	}
 	
+	public static void buyerMenu() {
+		C206_CaseStudy.setHeader("Buyer Menu");
+		System.out.println("1. Category");
+		System.out.println("2. Deal");
+		
+	}
+	public static void mainMenu() {
+		C206_CaseStudy.setHeader("CAMPUS ONLINE AUCTION SHOP");
+		
+		System.out.println("1.Register Account");
+		System.out.println("2.Login");
+		System.out.println("3.Quit");
+	}
 	public static void menu() {
 		C206_CaseStudy.setHeader("CASE STUDY");
 		
-		System.out.println("1. User Account");
-		System.out.println("2. Category");
-		System.out.println("3. Item");
-		System.out.println("4. Bid");
-		System.out.println("5. Deal");
-		System.out.println("6. Quit");
+		//System.out.println("1. User Account");
+		System.out.println("1. Category");
+		System.out.println("2. Item");
+		System.out.println("3. Bid");
+		System.out.println("4. Deal");
+		System.out.println("5. Quit");
 		
 		Helper.line(80, "-");
 	}
-	
+	// user acc menu
 	private static void userAccSubMenu() {
 		C206_CaseStudy.setHeader("USER ACCOUNT");
 		
@@ -94,14 +184,43 @@ public class C206_CaseStudy {
 		System.out.println("3. Delete User Account");
 		Helper.line(80, "-");
 	}
+	// deal menu
 	private static void dealSubMenu() {
-		C206_CaseStudy.setHeader("USER ACCOUNT");
+		C206_CaseStudy.setHeader("Deal");
 		
 		System.out.println("1. Add New Deal");
 		System.out.println("2. Display All Deals");
 		System.out.println("3. Delete Deal based on ID");
 		Helper.line(80, "-");
 	}
+	// category menu
+	private static void catSubMenu() {
+		C206_CaseStudy.setHeader("Category");
+
+		System.out.println("1. Add New Category");
+		System.out.println("2. Display All Category");
+		System.out.println("3. Delete Category based on name");
+		Helper.line(80, "-");
+	}
+	// item menu
+	private static void itemSubMenu() {
+		C206_CaseStudy.setHeader("Item");
+
+		System.out.println("1. Add New Item");
+		System.out.println("2. Display All Items");
+		System.out.println("3. Delete Item based on name");
+		Helper.line(80, "-");
+	}
+	// bid menu
+	private static void bidSubMenu() {
+		C206_CaseStudy.setHeader("Bid");
+
+		System.out.println("1. Add New Bid");
+		System.out.println("2. Display All Bid");
+		System.out.println("3. Delete Bid based on ID");
+		Helper.line(80, "-");
+	}
+	
 	private static void setHeader(String header) {
 		// TODO Auto-generated method stub
 		Helper.line(80, "-");
@@ -189,6 +308,35 @@ public class C206_CaseStudy {
 		}
 	}
 	//================================= Option 2 - Category =================================
+	// input category name
+
+	
+	
+	// add category name
+
+	
+	// retrieve all category
+	
+
+	
+	
+	// display category
+
+	
+	
+	
+	
+	
+	
+	// find if category name exist
+	
+	
+	
+	
+
+	
+	// delete category based on name
+	
 	
 	
 	
@@ -197,12 +345,74 @@ public class C206_CaseStudy {
 	
 	//================================= Option 3 - Item =================================
 	
+	// input item
+
+	
+	
+
+	
+	// add item
+
+	
+
+	
+	// retrieve all items
+
+	
+	
+	
+	
+	
+	// display all items
+	
+	
+	
+	
+	
+	// find if item exists
+	
+	
+	
+	
+	
+	// delete item based on name
 	
 	
 	
 	
 	
 	//================================= Option 4 - Bid =================================
+	
+	// input bid
+
+	
+	
+	
+	// add bid 
+
+	
+	
+	
+	// retrieve all bids
+
+	
+	
+	
+	// display bid
+	
+	
+	
+	
+	
+	
+	// find if bid exist
+	
+	
+	
+	
+	
+	// delete bid based on id
+	
 	
 	
 	
@@ -222,6 +432,7 @@ public class C206_CaseStudy {
 		Deal deal = new Deal (dealID, itemName,sellerEmail, buyerEmail, transPrice, closeDate);
 		return deal;
 	}
+	
 	// add deal
 	public static void addDeal (ArrayList<Deal> dealList, Deal d) {
 		dealList.add(d);
