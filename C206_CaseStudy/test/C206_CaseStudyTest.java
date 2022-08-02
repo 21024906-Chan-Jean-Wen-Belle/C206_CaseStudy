@@ -60,8 +60,8 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that User Account arraylist size is 2", 2, useraccList.size());
 		
 		allUserAccount = C206_CaseStudy.retrieveAllUserAccounts(useraccList);
-		testOutput = String.format("%-15s %-15s %-15s %-15s\n", "May Tan", "Test Role", "may@gmail.com", "May Tan 123");
-		testOutput += String.format("%-15s %-15s %-15s %-15s\n", "Sam Goh", "Test Role", "sam123@hotmail.com", "Sam likes animals");
+		testOutput = String.format("%-15s %-15s %-15s %-15s\n", "May Tan", "Buyer", "may@gmail.com", "May Tan 123");
+		testOutput += String.format("%-15s %-15s %-15s %-15s\n", "Sam Goh", "Seller", "sam123@hotmail.com", "Sam likes animals");
 		
 		assertEquals("Test that viewAllUserAccount", testOutput, allUserAccount);
 	}
