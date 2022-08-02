@@ -219,7 +219,7 @@ public class C206_CaseStudyTest {
 	  }
 	
 	@Test
-	  public void testdoExistBid () {
+	  public void testdoExistBid () { 
 	    // Bid list is not null, so that can delete bid - boundary
 	    assertNotNull("Test if there is valid bid in the arraylist to delete", bidList);
 	    C206_CaseStudy.addBid(bidList, b1);
