@@ -53,7 +53,7 @@ public class C206_CaseStudy {
 							C206_CaseStudy.sellerMenu();
 							int s_option = Helper.readInt("Enter option number > ");
 							
-							if (option == 1) {
+							if (s_option == 1) {
 								itemSubMenu();
 								int item_option= Helper.readInt("Enter option for item > ");
 								
@@ -71,7 +71,7 @@ public class C206_CaseStudy {
 									
 								}
 											
-							} else if (option == 2) {
+							} else if (s_option == 2) {
 								bidSubMenu();
 											
 								int bid_option = Helper.readInt("Enter option for bid > ");
@@ -80,11 +80,12 @@ public class C206_CaseStudy {
 									
 								}
 								else if (bid_option == 2) {
-								// view all bids
-											
+									// view all bids
+									C206_CaseStudy.viewAllBid(bidList);
 								}
 								else if (bid_option == 3) {
-								// delete bid based on id
+									// delete bid based on id
+									C206_CaseStudy.deleteBid(bidList);
 								}
 								
 							}
@@ -116,24 +117,32 @@ public class C206_CaseStudy {
 								}
 								
 								
-							} else if (b_option == 2) {
-								dealSubMenu();			
-								int deal_option = Helper.readInt("Enter option for deal> ");
-								
-								if (deal_option == 1) {
+						} else if (b_option == 2) {
+							dealSubMenu();
+							int deal_option = Helper.readInt("Enter option for deal> ");
+
+							if (deal_option == 1) {
 								// add deals
 								Deal d = inputDeal();
 								C206_CaseStudy.addDeal(dealList, d);
 								System.out.println("New Deal added!");
-										
-								} else if (deal_option == 2) {
+
+
+
+							} else if (deal_option == 2) {
 								// View all deals
-									retrieveAllDeal(dealList);
-									viewAllDeals(dealList);
-									
-								} else if (deal_option == 3) {
+								retrieveAllDeal(dealList);
+								viewAllDeals(dealList);
+
+								
+
+							} else if (deal_option == 3) {
 								// Delete deals
-									deleteDeal(dealList);
+								deleteDeal(dealList);
+
+
+
+
 								}
 								
 							}
@@ -394,40 +403,76 @@ public class C206_CaseStudy {
 	//================================= Option 4 - Bid =================================
 	
 	// input bid
-
-	
-	
+	private static Bid inputBid() {
+		
+		String bidId = Helper.readString("Enter ID for bid> ");
+	    String itemName = Helper.readString("Enter item name > ");
+	    String sellerEmail = Helper.readString("Enter seller name> ");
+	    String buyerEmail = Helper.readString("Enter buyer name > ");
+	    double bidPrice = Helper.readDouble("Enter the transaction price > ");
+	    
+	    Bid bid = new Bid (bidId, itemName,sellerEmail, buyerEmail, bidPrice);
+	    return bid;
+	}
 	
 	// add bid 
-
-	
-	
+	public static void addBid (ArrayList<Bid> bidList, Bid b) {
+	    bidList.add(b);
+	}
 	
 	// retrieve all bids
+	public static String retrieveAllBid(ArrayList<Bid> bidList) {
+	    String output = "";
 
-	
-	
+	    for (int i = 0; i < bidList.size(); i++) {
+	      output += String.format("%-10s %-20s %-30s %-30s %-20.2f\n", bidList.get(i).getBidId(),
+	          bidList.get(i).getItemName(), 
+	          bidList.get(i).getSellerEmail(),
+	          bidList.get(i).getBuyerEmail(),
+	          bidList.get(i).getBidPrice());
+	    }
+	    return output;
+	  }
 	
 	// display bid
-	
-	
-	
-	
-	
+	public static void viewAllBid (ArrayList<Bid> bidList) {
+		C206_CaseStudy.setHeader("BID LIST");
+		String output = String.format("%-10s %-20s %-30s %-30s %-20s\n", "ID", "ITEM NAME",
+				 "SELLER EMAIL", "BUYER EMAIL","BID PRICE");
+		output += retrieveAllBid(bidList);
+		System.out.println(output);
+	}
 	
 	// find if bid exist
-	
-	
-	
-	
+	public static boolean doExistBid(ArrayList<Bid> bidList, String input_Bid) {
+		boolean doExistBid = false;
+		
+		for (int i = 0; i < bidList.size(); i++) {
+			String bidId = bidList.get(i).getBidId();
+			if (input_Bid.equals(bidId)) {
+				doExistBid = true;
+			}
+		}
+		
+		return doExistBid;
+	}
 	
 	// delete bid based on id
-	
-	
-	
-	
-	
-	
+	public static void deleteBid(ArrayList<Bid> bidList) {
+		String BidID = Helper.readString("Enter ID for bid> ");
+		Boolean doExistBid = doExistBid(bidList, BidID);
+		if (doExistBid == false) {
+			
+			System.out.println("Invalid Bid ID");
+		} else {
+			for (int i = 0; i < bidList.size(); i++) {
+				if (BidID.equals(bidList.get(i).getBidId())) {
+					bidList.remove(i);
+				}
+			}
+			System.out.println("Bid deleted");
+		}
+	}
 	
 	//================================= Option 5 - Deal =================================
 	//input deal
