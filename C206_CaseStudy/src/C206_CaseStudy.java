@@ -77,6 +77,10 @@ public class C206_CaseStudy {
 								int bid_option = Helper.readInt("Enter option for bid > ");
 											
 								if (bid_option == 1) {
+									// add bid
+									Bid b = inputBid();
+									C206_CaseStudy.addBid(bidList, b);
+									System.out.println("Bid added.");
 									
 								}
 								else if (bid_option == 2) {
@@ -407,8 +411,8 @@ public class C206_CaseStudy {
 		
 		String bidId = Helper.readString("Enter ID for bid> ");
 	    String itemName = Helper.readString("Enter item name > ");
-	    String sellerEmail = Helper.readString("Enter seller name> ");
-	    String buyerEmail = Helper.readString("Enter buyer name > ");
+	    String sellerEmail = Helper.readString("Enter seller email> ");
+	    String buyerEmail = Helper.readString("Enter buyer email > ");
 	    double bidPrice = Helper.readDouble("Enter the transaction price > ");
 	    
 	    Bid bid = new Bid (bidId, itemName,sellerEmail, buyerEmail, bidPrice);
@@ -479,8 +483,8 @@ public class C206_CaseStudy {
 	private static Deal inputDeal() { 
 		String dealID = Helper.readString("Enter ID for deal> ");
 		String itemName = Helper.readString("Enter item name > ");
-		String sellerEmail = Helper.readString("Enter seller name> ");
-		String buyerEmail = Helper.readString("Enter buyer name > ");
+		String sellerEmail = Helper.readString("Enter seller email> ");
+		String buyerEmail = Helper.readString("Enter buyer email > ");
 		double transPrice = Helper.readDouble("Enter the transaction price > ");
 		String closeDate = Helper.readString("Enter the close date > ");
 		
