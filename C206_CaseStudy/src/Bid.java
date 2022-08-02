@@ -29,18 +29,18 @@ public class Bid  {
 	}
 
 	public String getBuyerEmail() {
-		return buyerEmail;
+		return buyerEmail;   
 	}
 
 	public double getBidPrice() {
 		return bidPrice;
 	}
-	
+
+
 	public void setIsDeleted(boolean b) {
 		// TODO Auto-generated method stub
 		this.deleted = deleted;
 	}
-	
 	
 	
 }

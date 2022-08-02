@@ -75,9 +75,9 @@ public class C206_CaseStudyTest {
 	public void testDoExistUserAccount() {
 		// boundary
 		assertNotNull("Test if there is valid User Account arraylist", useraccList);
-
-		C206_CaseStudy.addUserAccount(useraccList, u1);
-
+		
+		C206_CaseStudy.addUserAccount(useraccList, u1); 
+		
 		// normal
 		Boolean doExist = C206_CaseStudy.doExistUserAccount(useraccList, "may@gmail.com");
 		assertTrue("Test if the User Account exists in the arraylist?", doExist);
@@ -121,7 +121,6 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that Deal arraylist size is 2", 2, dealList.size());
 		assertSame("Check that Deal is added", d2, dealList.get(1));
 	}
-
 	@Test
 	public void testRetrieveAllDeals() {
 		// Test if deal list is not null but empty -boundary
@@ -132,30 +131,28 @@ public class C206_CaseStudyTest {
 		String testOutput = "";
 		assertEquals("Check that ViewAllDeallist", testOutput, allDeal);
 
-		// Given an empty list, after adding 2 deal, test if the size of the list is 2 -
-		// normal
+		// Given an empty list, after adding 2 deal, test if the size of the list is 2 - normal
 		C206_CaseStudy.addDeal(dealList, d1);
 		C206_CaseStudy.addDeal(dealList, d2);
 		assertEquals("Test that Deal arraylist size is 2", 2, dealList.size());
 
-		// test if the expected output string same as the list of deal retrieved from
-		// the deal list
+		//test if the expected output string same as the list of deal retrieved from the deal list	
 		allDeal = C206_CaseStudy.retrieveAllDeal(dealList);
-		testOutput = String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n", "D001", "Toy Story 4", "may@gmail.com",
-				"sam123@hotmail.com", 500, "1 July 2021");
-		testOutput += String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n", "D002", "Chip & Dale CD",
-				"sam123@hotmail.com", "may@gmail.com", 30, "3 March 2021");
+		testOutput = String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n","D001", "Toy Story 4", "may@gmail.com","sam123@hotmail.com" ,500 , "1 July 2021" );
+		testOutput += String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n","D002", "Chip & Dale CD","sam123@hotmail.com","may@gmail.com" , 30 , "3 March 2021" );
+		
+		assertEquals ("Test that Deal arraylist size is 2", 2, dealList.size() );
 
-		// assertEquals("Test that ViewAllDeallist", testOutput, allDeal);
 	}
 
+	
+	
 	@Test
 	public void testdoExistDeal() {
 		// Deal list is not null, so that can delete deal - boundary
 		assertNotNull("Test if there is valid Deal arraylist to delete", dealList);
 		C206_CaseStudy.addDeal(dealList, d1);
-		// Given a list with 2 deal, after deleting 1 deal, the size of the list is 1 -
-		// normal
+		// Given a list with 2 deal, after deleting 1 deal, the size of the list is 1 - normal
 		boolean t = C206_CaseStudy.doExistDeal(dealList, "D001");
 		assertTrue("Test if an available deal is ok to delete?", t);
 
@@ -210,19 +207,15 @@ public class C206_CaseStudyTest {
 		String testOutput = "";
 		assertEquals("Check that ViewAllBidlist", testOutput, allBid);
 
-		// Given an empty list, after adding 2 items, test if the size of the list is 2
-		// - normal
+		// Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
 		C206_CaseStudy.addBid(bidList, b1);
 		C206_CaseStudy.addBid(bidList, b2);
 		assertEquals("Test that Bid in the arraylist size is 2", 2, bidList.size());
 
-		// test if the expected output string same as the list of bid retrieved from the
-		// bid list
+		// test if the expected output string same as the list of bid retrieved from the bid list
 		allBid = C206_CaseStudy.retrieveAllBid(bidList);
-		testOutput = String.format("%-10s %-10s %-30s %-30s %-10s\n", "B001", "Apple", "jimmy@gmail.com",
-				"tim@gmail.com", 50);
-		testOutput += String.format("%-10s %-10s %-30s %-30s %-10s\n", "B002", "Samsung", "tim@gmail.com",
-				"jimmy@gmail.com", 80);
+		testOutput = String.format("%-10s %-10s %-30s %-30s %-10s\n", "B001", "Apple", "jimmy@gmail.com", "tim@gmail.com", 50);
+		testOutput += String.format("%-10s %-10s %-30s %-30s %-10s\n", "B002", "Samsung", "tim@gmail.com", "jimmy@gmail.com", 80);
 
 	}
 
@@ -232,8 +225,7 @@ public class C206_CaseStudyTest {
 		assertNotNull("Test if there is valid bid in the arraylist to delete", bidList);
 		C206_CaseStudy.addBid(bidList, b1);
 
-		// Given a list with 2 items, after deleting 1 item, the size of the list is 1 -
-		// normal
+		// Given a list with 2 items, after deleting 1 item, the size of the list is 1 - normal
 		boolean b_exist = C206_CaseStudy.doExistBid(bidList, "B001");
 		assertTrue("Test if an available bid is ok to delete?", b_exist);
 
@@ -251,19 +243,17 @@ public class C206_CaseStudyTest {
 
 	}
 
+	
 	// ------------------------------Item-----------------------------------
 
 	@Before
 	public void setUpItem() throws Exception {
 		// prepares test data
-		I1 = new Item("Toy Story 4", "This item is for consumers who are a fan of toy story", 500.00, "10 August 2021",
-				"20August 2021", 5.00);
-		I2 = new Item("Chip & Dale CD", "This item is for consumers who are a fan of Chip & Dale", 30.00,
-				"21 August 2021", "31 August 2021", 2.00);
+		I1 = new Item("Toy Story 4", "This item is for consumers who are a fan of toy story", 500.00, "10 August 2021", "20August 2021", 5.00);
+		I2 = new Item("Chip & Dale CD", "This item is for consumers who are a fan of Chip & Dale", 30.00, "21 August 2021", "31 August 2021", 2.00);
 
 		itemList = new ArrayList<Item>();
 	}
-
 	@Test
 	public void testAddItem() {
 		// Item list is not null, so that can add a new Item - boundary
@@ -281,7 +271,6 @@ public class C206_CaseStudyTest {
 		assertSame("Check that Item is added", I2, itemList.get(1));
 
 	}
-
 	@Test
 	public void testRetrieveAllItem() {
 		// Test if Item list is not null but empty -boundary
@@ -292,21 +281,15 @@ public class C206_CaseStudyTest {
 		String testOutput = "";
 		assertEquals("Check that ViewAllItemlist", testOutput, allItem);
 
-		// Given an empty list, after adding 2 items, test if the size of the list is 2
-		// - normal
+		// Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
 		C206_CaseStudy.addItem(itemList, I1);
 		C206_CaseStudy.addItem(itemList, I2);
 		assertEquals("Test that item in the arraylist size is 2", 2, itemList.size());
 
-		// test if the expected output string same as the list of items retrieved from
-		// the item list
+		// test if the expected output string same as the list of items retrieved from the item list
 		allItem = C206_CaseStudy.retrieveAllItem(itemList);
-		testOutput = String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n", "Toy Story 4",
-				"This item is for consumers who are a fan of toy story", 50.00, "10 August 2021", "20August 2021",
-				5.00);
-		testOutput += String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n", "Chip & Dale CD",
-				"This item is for consumers who are a fan of Chip & Dale", 30.00, "21 August 2021", "31 August 2021",
-				2.00);
+		testOutput = String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n", "Toy Story 4", "This item is for consumers who are a fan of toy story", 50.00, "10 August 2021", "20August 2021", 5.00);
+		testOutput += String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n", "Chip & Dale CD", "This item is for consumers who are a fan of Chip & Dale", 30.00, "21 August 2021", "31 August 2021", 2.00);
 		// assertEquals("Test that ViewAllItemlist", testOutput, allItem);
 	}
 
@@ -315,8 +298,7 @@ public class C206_CaseStudyTest {
 		// Item list is not null, so that can delete item - boundary
 		assertNotNull("Test if there is valid item in the arraylist to delete", itemList);
 		C206_CaseStudy.addItem(itemList, I1);
-		// Given a list with 2 items, after deleting 1 item, the size of the list is 1 -
-		// normal
+		// Given a list with 2 items, after deleting 1 item, the size of the list is 1 - normal
 		boolean t = C206_CaseStudy.doExistItem(itemList, "Toy Story 4");
 		assertTrue("Test if an available item is ok to delete?", t);
 
@@ -333,5 +315,4 @@ public class C206_CaseStudyTest {
 		dealList = null;
 
 	}
-
 }

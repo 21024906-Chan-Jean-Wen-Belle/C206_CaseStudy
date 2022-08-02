@@ -18,8 +18,6 @@ public class Item {
 		this.increment = increment ;
 		this.deleted = false;
 
-		
-
 	}
 
 
@@ -52,10 +50,9 @@ public class Item {
 		return increment;
 	}
 	
-	
 	public void setIsDeleted(boolean b) {
 		this.deleted = deleted ;
 		
 	}
-	
+
 }
