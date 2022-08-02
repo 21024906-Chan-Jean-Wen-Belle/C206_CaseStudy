@@ -70,7 +70,7 @@ public class C206_CaseStudyTest {
 		// boundary
 		assertNotNull("Test if there is valid User Account arraylist", useraccList);
 		
-		C206_CaseStudy.addUserAccount(useraccList, u1);
+		C206_CaseStudy.addUserAccount(useraccList, u1); 
 		
 		// normal
 		Boolean doExist = C206_CaseStudy.doExistUserAccount(useraccList, "may@gmail.com");

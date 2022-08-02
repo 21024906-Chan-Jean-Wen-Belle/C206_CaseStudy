@@ -428,7 +428,7 @@ public class C206_CaseStudy {
 	
 	//================================= Option 5 - Deal =================================
 	//input deal
-	private static Deal inputDeal() {
+	private static Deal inputDeal() { 
 		String dealID = Helper.readString("Enter ID for deal> ");
 		String itemName = Helper.readString("Enter item name > ");
 		String sellerEmail = Helper.readString("Enter seller name> ");
