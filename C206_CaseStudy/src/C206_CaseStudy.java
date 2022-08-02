@@ -17,9 +17,13 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 		
 		ArrayList <User> useraccList = new ArrayList<User>();
+		
 		ArrayList<Deal> dealList = new ArrayList<Deal>();
+		
 		ArrayList<Category>catList = new ArrayList<Category>();
+		
 		ArrayList<Item>itemList = new ArrayList<Item>();
+		
 		ArrayList<Bid>bidList = new ArrayList<Bid>();
 		
 		useraccList.add(new User("Tommy", "Buyer", "Tommy_Wong@gmail.com", "TommyWong123"));
