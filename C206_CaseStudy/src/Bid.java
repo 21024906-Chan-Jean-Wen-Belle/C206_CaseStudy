@@ -29,7 +29,7 @@ public class Bid  {
 	}
 
 	public String getBuyerEmail() {
-		return buyerEmail;
+		return buyerEmail;   
 	}
 
 	public double getBidPrice() {

@@ -149,13 +149,13 @@ public class C206_CaseStudy {
 
 
 
-								}
+								
 								
 							}
 						}
 					}
 				}
-				
+			}
 			} else if (y_option == 3) {
 				System.out.println("Thank you for using CAMPUS ONLINE AUCTION SHOP !");
 			}
