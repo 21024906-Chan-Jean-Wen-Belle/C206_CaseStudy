@@ -13,10 +13,13 @@ public class C206_CaseStudyTest {
 	private Deal d2;
 	private Item I1;
 	private Item I2;
+	private Bid b1;
+	private Bid b2;
 	
 	private ArrayList<User> useraccList;
 	private ArrayList<Deal> dealList;
 	private ArrayList<Item> itemList;
+	private ArrayList<Bid> bidList;
 	
 	public C206_CaseStudyTest() {
 		super();
@@ -138,7 +141,7 @@ public class C206_CaseStudyTest {
 		testOutput = String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n","D001", "Toy Story 4", "may@gmail.com","sam123@hotmail.com" ,500 , "1 July 2021" );
 		testOutput += String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n","D002", "Chip & Dale CD","sam123@hotmail.com","may@gmail.com" , 30 , "3 March 2021" );
 	
-		//assertEquals("Test that ViewAllDeallist", testOutput, allDeal);
+
 	}
 	
 
@@ -164,6 +167,81 @@ public class C206_CaseStudyTest {
 		d2 = null;
 		dealList = null;
 	}
+	
+	// --------------------------------------------------Bid-----------------------------------------------
+	@Before
+	public void setupBid() throws Exception {
+		//prepares test data
+	    b1 = new Bid ("B001", "Apple", "jimmy@gmail.com", "tim@gmail.com", 50);
+	    b2 = new Bid ("B002", "Samsung", "tim@gmail.com", "jimmy@gmail.com", 80);
+	    
+	    bidList = new ArrayList<Bid>();
+	}
+	
+	@Test 
+	public void testAddBid() {
+		// Bid list is not null, so that can add a new item
+		assertNotNull("Test if there is valid Bid arraylist to add to", bidList);
+		
+		//Given an empty list, after adding 1 item, the size of the list is 1
+		C206_CaseStudy.addBid(bidList, b1);		
+		assertEquals("Test if that Bid arraylist size is 1", 1, bidList.size());
+		
+		//The item just added is as same as the first item of the list
+		assertSame("Test that Bid is added same as 1st item of the list", b1, bidList.get(0));
+		
+		//Add another item. test the size of the list is 2
+		C206_CaseStudy.addBid(bidList, b2);
+	    assertEquals("Check that Bid arraylist size is 2", 2, bidList.size());
+	    assertSame("Check that Bid is added", b2, bidList.get(1));
+	}
+	
+	@Test
+	  public void testRetrieveAllBid() {
+	    // Test if Bid list is not null but empty -boundary
+	    assertNotNull("Test if there is valid Bid in the arraylist", bidList);
+	    
+	    //test if the list of bid retrieved from the bid list is empty - boundary
+	    String allBid= C206_CaseStudy.retrieveAllBid(bidList);
+	    String testOutput = "";
+	    assertEquals("Check that ViewAllBidlist", testOutput, allBid);
+	    
+	    //Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+	    C206_CaseStudy.addBid(bidList, b1);
+	    C206_CaseStudy.addBid(bidList, b2);
+	    assertEquals("Test that Bid in the arraylist size is 2", 2, bidList.size());
+	    
+	    //test if the expected output string same as the list of bid retrieved from the bid list  
+	    allBid= C206_CaseStudy.retrieveAllBid(bidList);
+	    testOutput = String.format("%-10s %-10s %-30s %-30s %-10s\n", "B001", "Apple", "jimmy@gmail.com", "tim@gmail.com", 50); 
+	    testOutput += String.format("%-10s %-10s %-30s %-30s %-10s\n", "B002", "Samsung", "tim@gmail.com", "jimmy@gmail.com", 80);
+	  
+	  }
+	
+	@Test
+	  public void testdoExistBid () {
+	    // Bid list is not null, so that can delete bid - boundary
+	    assertNotNull("Test if there is valid bid in the arraylist to delete", bidList);
+	    C206_CaseStudy.addBid(bidList, b1);
+	    
+	    // Given a list with 2 items, after deleting 1 item, the size of the list is 1 - normal
+	    boolean b_exist = C206_CaseStudy.doExistBid(bidList,"B001");
+	    assertTrue("Test if an available bid is ok to delete?", b_exist);
+	    
+	    // Error Condition, item does not exist
+	    b2.setIsDeleted(true);
+	    b_exist = C206_CaseStudy.doExistBid(bidList,"B002");
+	    assertFalse("Test if an available bid is ok to delete?", b_exist);
+	  }
+	  
+	    @After
+	    public void tearDownBid() throws Exception {
+	      b1=null;
+	      b2=null;
+	      bidList = null;
+
+	   }
+	
 	
 	 //------------------------------Item-----------------------------------
 	  
