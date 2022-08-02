@@ -403,7 +403,7 @@ public class C206_CaseStudy {
 	      
 	      if (!itemList.isEmpty()) {
 	        for (int i = 0; i < itemList.size(); i++) {
-	            output += String.format("%-10s %-20s %-30.2f %-30s %-20s %-20.2f\n", itemList.get(i).getName(),
+	            output += String.format("%-10s %-20s %-20.2f %-30s %-20s %-20.2f\n", itemList.get(i).getName(),
 	                itemList.get(i).getDescription(), 
 	                itemList.get(i).getBidPrice(),
 	                itemList.get(i).getStartDate(), itemList.get(i).getEndDate(), itemList.get(i).getIncrement());
