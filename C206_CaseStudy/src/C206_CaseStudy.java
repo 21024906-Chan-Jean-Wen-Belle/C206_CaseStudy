@@ -23,6 +23,7 @@ public class C206_CaseStudy {
 		
 		ArrayList<Item>itemList = new ArrayList<Item>();
 		
+		
 		ArrayList<Bid>bidList = new ArrayList<Bid>();
 		
 		useraccList.add(new User("Tommy", "Buyer", "Tommy_Wong@gmail.com", "TommyWong123"));
