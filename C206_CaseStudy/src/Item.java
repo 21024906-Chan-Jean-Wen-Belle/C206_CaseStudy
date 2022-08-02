@@ -16,7 +16,7 @@ public class Item {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.increment = increment ;
-		this.deleted=deleted;
+		this.deleted=false;
 	}
 
 
