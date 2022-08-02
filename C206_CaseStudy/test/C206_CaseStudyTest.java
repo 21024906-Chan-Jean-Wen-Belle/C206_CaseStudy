@@ -11,9 +11,12 @@ public class C206_CaseStudyTest {
 	private User u2;
 	private Deal d1;
 	private Deal d2;
+	private Item I1;
+	private Item I2;
 	
 	private ArrayList<User> useraccList;
 	private ArrayList<Deal> dealList;
+	private ArrayList<Item> itemList;
 	
 	public C206_CaseStudyTest() {
 		super();
@@ -161,5 +164,76 @@ public class C206_CaseStudyTest {
 		d2 = null;
 		dealList = null;
 	}
-		
+	
+	 //------------------------------Item-----------------------------------
+	  
+	  @Before
+	  public void setUpItem() throws Exception {
+	    //prepares test data
+	    I1 = new Item ("Toy Story 4","This item is for consumers who are a fan of toy story",500.00, "10 August 2021", "20August 2021", 5.00);
+	    I2 = new Item ("Chip & Dale CD","This item is for consumers who are a fan of Chip & Dale",30.00,"21 August 2021","31 August 2021",2.00 );
+	  
+	    itemList= new ArrayList<Item>();
+	  }
+	  @Test
+	  public void testAddItem() {
+	    // Item list is not null, so that can add a new Item - boundary
+	    assertNotNull("Check if there is valid Item arraylist to add to", itemList);
+	    
+	    // Given an empty list, after adding 1 item, the size of the list is 1 - normal
+	    // The item just added is as same as the first item of the list
+	    C206_CaseStudy.addItem(itemList, I1);
+	    assertEquals("Check that item arraylist size is 1", 1, itemList.size());
+	    assertSame("Check that Item is added", I1, itemList.get(0));
+	    // Add another item. test The size of the list is 2? -normal
+	    // The item just added is as same as the second item of the list
+	    C206_CaseStudy.addItem(itemList, I2);
+	    assertEquals("Check that Item arraylist size is 2", 2, itemList.size());
+	    assertSame("Check that Item is added", I2, itemList.get(1));
+	    
+	  }
+	  @Test
+	  public void testRetrieveAllItem() {
+	    // Test if Item list is not null but empty -boundary
+	    assertNotNull("Test if there is valid Item in the arraylist", itemList);
+	    
+	    //test if the list of item retrieved from the item list is empty - boundary
+	    String allItem= C206_CaseStudy.retrieveAllItem(itemList);
+	    String testOutput = "";
+	    assertEquals("Check that ViewAllItemlist", testOutput, allItem);
+	    
+	    //Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+	    C206_CaseStudy.addItem(itemList, I1);
+	    C206_CaseStudy.addItem(itemList, I2);
+	    assertEquals("Test that item in the arraylist size is 2", 2, itemList.size());
+	    
+	    //test if the expected output string same as the list of items retrieved from the item list  
+	    allItem= C206_CaseStudy.retrieveAllItem(itemList);
+	    testOutput = String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n","Toy Story 4","This item is for consumers who are a fan of toy story",50.00, "10 August 2021", "20August 2021", 5.00); 
+	    testOutput += String.format("%-10s %-30s %-30s %-10s %-20s %-10s\n","Chip & Dale CD","This item is for consumers who are a fan of Chip & Dale",30.00,"21 August 2021","31 August 2021",2.00 );
+	    //assertEquals("Test that ViewAllItemlist", testOutput, allItem);
+	  }
+	  
+	  @Test
+	  public void testdoExistItem () {
+	    // Item list is not null, so that can delete item - boundary
+	    assertNotNull("Test if there is valid item in the arraylist to delete", itemList);
+	    C206_CaseStudy.addItem(itemList, I1);
+	    // Given a list with 2 items, after deleting 1 item, the size of the list is 1 - normal
+	    boolean t = C206_CaseStudy.doExistItem(itemList,"Toy Story 4");
+	    assertTrue("Test if an available item is ok to delete?", t);
+	    
+	    // Error Condition, item does not exist
+	    I2.setIsDeleted(true);
+	    t = C206_CaseStudy.doExistItem(itemList,"Chip & Dale CD");
+	    assertFalse("Test if an available item is ok to delete?", t);
+	  }
+	  
+	    @After
+	    public void tearDownItem() throws Exception {
+	      I1=null;
+	      I2=null;
+	      dealList = null;
+
+	   }
 }
