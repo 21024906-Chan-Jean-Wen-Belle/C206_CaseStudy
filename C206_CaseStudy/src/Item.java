@@ -6,6 +6,7 @@ public class Item {
 	private String startDate;
 	private String endDate;
 	private double increment;
+	private boolean deleted;
 
 	
 	public Item (String name, String description, double bidPrice, String startDate, String endDate, double increment) {
@@ -15,6 +16,10 @@ public class Item {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.increment = increment ;
+		this.deleted = false;
+
+		
+
 	}
 
 
@@ -46,7 +51,11 @@ public class Item {
 	public double getIncrement() {
 		return increment;
 	}
-
+	
+	
+	public void setIsDeleted(boolean b) {
+		this.deleted = deleted ;
+		
+	}
+	
 }
-
-

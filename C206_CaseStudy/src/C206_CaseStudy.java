@@ -10,6 +10,8 @@ public class C206_CaseStudy {
 	private static final int OPTION_DEAL = 4;
 	private static final int OPTION_QUIT = 5;
 	
+	public static String email = "";
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -30,7 +32,7 @@ public class C206_CaseStudy {
 		
 		int y_option = 0;
 		
-		while (option != 4) {
+		while (option != 3) {
 			C206_CaseStudy.mainMenu();
 			y_option = Helper.readInt("Enter option number > ");
 		
@@ -43,51 +45,72 @@ public class C206_CaseStudy {
 				
 				viewAllUserAccount(useraccList);
 				
-				String email = Helper.readString("Enter email > ");
+				email = Helper.readString("Enter email > ");
 				String password = Helper.readString("Enter password > ");
 				
 				for (int i = 0; i < useraccList.size(); i++) {
 					
 					if (email.matches(useraccList.get(i).getEmail()) && password.matches(useraccList.get(i).getPassword()) ) {
 						if (useraccList.get(i).getRole().equalsIgnoreCase("Seller")) {
-							C206_CaseStudy.sellerMenu();
-							int s_option = Helper.readInt("Enter option number > ");
+							option = 0;
 							
-							if (option == 1) {
-								itemSubMenu();
-								int item_option= Helper.readInt("Enter option for item > ");
+							while ((option != 4)) {
+								C206_CaseStudy.sellerMenu();
+								option = Helper.readInt("Enter option number > ");
 								
-								if (item_option == 1) {
-								// add item
+								if (option == 1) {
+									itemSubMenu();
+									int item_option= Helper.readInt("Enter option for item > ");
 									
-								}
-								else if (item_option == 2) {
-								// view all items
-								
-								}
-								else if (item_option == 3) {
-								// delete item based on name
-									C206_CaseStudy.deleteUserAccount(useraccList);
+									if (item_option == 1) {
+									// add item
+										
+									}
+									else if (item_option == 2) {
+									// view all items
 									
-								}
-											
-							} else if (option == 2) {
-								bidSubMenu();
-											
-								int bid_option = Helper.readInt("Enter option for bid > ");
-											
-								if (bid_option == 1) {
+									}
+									else if (item_option == 3) {
+									// delete item based on name
+										
+										
+									}
+									else if (item_option == 4) {
+										
+									}
+												
+								} else if (option == 2) {
+									bidSubMenu();
+												
+									int bid_option = Helper.readInt("Enter option for bid > ");
+												
+									if (bid_option == 1) {
+										
+									}
+									else if (bid_option == 2) {
+									// view all bids
+												
+									}
+									else if (bid_option == 3) {
+									// delete bid based on id
+									}
 									
-								}
-								else if (bid_option == 2) {
-								// view all bids
-											
-								}
-								else if (bid_option == 3) {
-								// delete bid based on id
+								} else if (option == 3) {
+									
+									C206_CaseStudy.deleteUserAccount(useraccList, email);
+									viewAllUserAccount(useraccList);
+									
+									option = 4;
+									
+								} else if (option == 4) {
+									System.out.println("Bye!");
+									
+								} else {
+									System.out.println("Invalid option!");
 								}
 								
 							}
+							
 							
 						} else if (useraccList.get(i).getRole().equalsIgnoreCase("Buyer")) {	
 							C206_CaseStudy.buyerMenu();
@@ -134,6 +157,18 @@ public class C206_CaseStudy {
 									deleteDeal(dealList);
 								
 								}
+							} else if (option == 3) {
+								
+								C206_CaseStudy.deleteUserAccount(useraccList, email);
+								viewAllUserAccount(useraccList);
+								
+								option = 4;
+								
+							} else if (option == 4) {
+								System.out.println("Bye!");
+								
+							} else {
+								System.out.println("Invalid option!");
 							}
 						}
 					}
@@ -153,6 +188,7 @@ public class C206_CaseStudy {
 		System.out.println("1. Item");
 		System.out.println("2. Bid");
 		System.out.println("3. Delete Account");
+		System.out.println("4. Quit");
 		
 	}
 	
@@ -161,14 +197,15 @@ public class C206_CaseStudy {
 		System.out.println("1. Category");
 		System.out.println("2. Deal");
 		System.out.println("3. Delete Account");
+		System.out.println("4. Quit");
 		
 	}
 	public static void mainMenu() {
 		C206_CaseStudy.setHeader("CAMPUS ONLINE AUCTION SHOP");
 		
-		System.out.println("1.Register Account");
-		System.out.println("2.Login");
-		System.out.println("3.Quit");
+		System.out.println("1. Register Account");
+		System.out.println("2. Login");
+		System.out.println("3. Quit");
 	}
 	public static void menu() {
 		C206_CaseStudy.setHeader("CASE STUDY");
@@ -283,13 +320,12 @@ public class C206_CaseStudy {
 	}
 	
 	// Delete User Account
-	public static boolean doExistUserAccount(ArrayList<User> useraccList, String input_email_address) {
+	public static boolean doExistUserAccount(ArrayList<User> useraccList, String email) {
 		boolean doExist = false;
 		
 		for (int i = 0; i < useraccList.size(); i++) {
-			String email_address = useraccList.get(i).getEmail();
 			
-			if (input_email_address.equals(email_address)) {
+			if (email.equals(useraccList.get(i).getEmail())) {
 				doExist = true;
 			}
 		}
@@ -297,21 +333,22 @@ public class C206_CaseStudy {
 		return doExist;
 	}
 	
-	public static void deleteUserAccount(ArrayList<User> useraccList) {
-		C206_CaseStudy.viewAllUserAccount(useraccList);
-		String input_email_address = Helper.readString("Enter email address to delete user account > ");
+	public static void deleteUserAccount(ArrayList<User> useraccList, String email) {
+
+		boolean doExist = C206_CaseStudy.doExistUserAccount(useraccList, email);
 		
-		Boolean doExist = doExistUserAccount(useraccList, input_email_address);
 		if (doExist == false) {
 			
-			System.out.println("Invalid User Account");
+			System.out.println("\nInvalid User Account");
+			doExist = true;
 		} else {
 			for (int i = 0; i < useraccList.size(); i++) {
-				if (input_email_address.equals(useraccList.get(i).getEmail())) {
+				if (email.equals(useraccList.get(i).getEmail())) {
 					useraccList.remove(i);
+					System.out.println("\nUser Account deleted");
 				}
 			}
-			System.out.println("User Account deleted");
+			
 		}
 	}
 	//================================= Option 2 - Category =================================
@@ -352,80 +389,173 @@ public class C206_CaseStudy {
 	
 	//================================= Option 3 - Item =================================
 	
-	// input item
+		// input item
+		 public static Item inputItem() {
+		      String name = Helper.readString("Enter item name > ");
+		      String description = Helper.readString("Enter description > ");
+		      double minBidPrice = Helper.readDouble("Enter minimum bid price > ");
+		      String auctionSDate = Helper.readString("Enter auction start date > ");
+		      String auctionEDate = Helper.readString("Enter auction end date > ");
+		      double bidIncrement =  Helper.readDouble("Enter bid increment > ");
+		      
+		      if (name != null && description != null && auctionSDate != null && auctionEDate != null) {
+		        Item item = new Item (name, description, minBidPrice, auctionSDate, auctionEDate, bidIncrement);
+		         return item;
+		      } else {
+		        return null;
+		      }
+		     
+		      
+		    }
+		
+		
 
-	
-	
+		
+		// add item
+		  public static void addItem (ArrayList<Item> itemList, Item i) {
+		      itemList.add(i);
+		    }
+		    
+		 // retrieve all items
+		  public static String retrieveAllItem(ArrayList<Item> itemList) {
+		      String output = "";
+		      
+		      if (!itemList.isEmpty()) {
+		        for (int i = 0; i < itemList.size(); i++) {
+		            output += String.format("%-10s %-20s %-30.2f %-30s %-20s %-20.2f\n", itemList.get(i).getName(),
+		                itemList.get(i).getDescription(), 
+		                itemList.get(i).getBidPrice(),
+		                itemList.get(i).getStartDate(), itemList.get(i).getEndDate(), itemList.get(i).getIncrement());
+		          }
+		          
+		      }
+		      return output;
+		  }
+		      
 
+		// display all items
+		  public static void viewAllitems (ArrayList<Item> itemList) {
+			    C206_CaseStudy.setHeader("ITEMS LIST");
+			    String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "NAME", "DESCRIPTION ",
+			         "MIN BID PRICE", "AUCTION START DATE","AUCTION END DATE", "BID INCREMENT");
+			    output += retrieveAllItem(itemList);
+			    System.out.println(output);
+			  }	
+		
+		
+		
+		
+		// find if item exists
+		  public static boolean doExistItem(ArrayList<Item> itemList, String input_name) {
+			    boolean doExist = false;
+			    
+			    for (int i = 0; i < itemList.size(); i++) {
+			      String name= itemList.get(i).getName();
+			      if (input_name.equals(name) ) {
+			        doExist = true;
+			      }
+			    }
+			    return doExist;
+			    
+			  }	
+		
+		
+		
+		
+		// delete item based on name
+		
+		  public static void deleteitem(ArrayList<Item> itemList) {
+			    String item = Helper.readString("Enter name for item > ");
+			    Boolean doExist = doExistItem(itemList, item);
+			    if (doExist == false) {
+			      
+			      System.out.println("Invalid Item Name");
+			    } else {
+			      for (int i = 0; i < itemList.size(); i++) {
+			        if (item.equals(itemList.get(i).getName())) {
+			          itemList.remove(i);
+			        }
+			      }
+			      System.out.println("Item deleted");
+			    }
+			  }
 	
-	// add item
+		
+	
+		//================================= Option 4 - Bid =================================
+			
+			// input bid
+			private static Bid inputBid() {
+				
+				String bidId = Helper.readString("Enter ID for bid> ");
+			    String itemName = Helper.readString("Enter item name > ");
+			    String sellerEmail = Helper.readString("Enter seller email> ");
+			    String buyerEmail = Helper.readString("Enter buyer email > ");
+			    double bidPrice = Helper.readDouble("Enter the transaction price > ");
+			    
+			    Bid bid = new Bid (bidId, itemName,sellerEmail, buyerEmail, bidPrice);
+			    return bid;
+			}
+			
+			// add bid 
+			public static void addBid (ArrayList<Bid> bidList, Bid b) {
+			    bidList.add(b);
+			}
+			
+			// retrieve all bids
+			public static String retrieveAllBid(ArrayList<Bid> bidList) {
+			    String output = "";
 
-	
-
-	
-	// retrieve all items
-
-	
-	
-	
-	
-	
-	// display all items
-	
-	
-	
-	
-	
-	// find if item exists
-	
-	
-	
-	
-	
-	// delete item based on name
-	
-	
-	
-	
-	
-	//================================= Option 4 - Bid =================================
-	
-	// input bid
-
-	
-	
-	
-	// add bid 
-
-	
-	
-	
-	// retrieve all bids
-
-	
-	
-	
-	// display bid
-	
-	
-	
-	
-	
-	
-	// find if bid exist
-	
-	
-	
-	
-	
-	// delete bid based on id
-	
-	
-	
-	
-	
-	
-	
+			    for (int i = 0; i < bidList.size(); i++) {
+			      output += String.format("%-10s %-20s %-30s %-30s %-20.2f\n", bidList.get(i).getBidId(),
+			          bidList.get(i).getItemName(), 
+			          bidList.get(i).getSellerEmail(),
+			          bidList.get(i).getBuyerEmail(),
+			          bidList.get(i).getBidPrice());
+			    }
+			    return output;
+			  }
+			
+			// display bid
+			public static void viewAllBid (ArrayList<Bid> bidList) {
+				C206_CaseStudy.setHeader("BID LIST");
+				String output = String.format("%-10s %-20s %-30s %-30s %-20s\n", "ID", "ITEM NAME",
+						 "SELLER EMAIL", "BUYER EMAIL","BID PRICE");
+				output += retrieveAllBid(bidList);
+				System.out.println(output);
+			}
+			
+			// find if bid exist
+			public static boolean doExistBid(ArrayList<Bid> bidList, String input_Bid) {
+				boolean doExistBid = false;
+				
+				for (int i = 0; i < bidList.size(); i++) {
+					String bidId = bidList.get(i).getBidId();
+					if (input_Bid.equals(bidId)) {
+						doExistBid = true;
+					}
+				}
+				
+				return doExistBid;
+			}
+			
+			// delete bid based on id
+			public static void deleteBid(ArrayList<Bid> bidList) {
+				String BidID = Helper.readString("Enter ID for bid> ");
+				Boolean doExistBid = doExistBid(bidList, BidID);
+				if (doExistBid == false) {
+					
+					System.out.println("Invalid Bid ID");
+				} else {
+					for (int i = 0; i < bidList.size(); i++) {
+						if (BidID.equals(bidList.get(i).getBidId())) {
+							bidList.remove(i);
+						}
+					}
+					System.out.println("Bid deleted");
+				}
+			}
+			
 	//================================= Option 5 - Deal =================================
 	//input deal
 	private static Deal inputDeal() {

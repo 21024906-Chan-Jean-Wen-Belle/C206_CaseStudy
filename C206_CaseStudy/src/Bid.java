@@ -5,6 +5,7 @@ public class Bid  {
 	private String sellerEmail;
 	private String buyerEmail;
 	private double bidPrice;
+	private boolean deleted;
 	
 	public Bid (String bidId, String itemName,String sellerEmail, String buyerEmail, double bidPrice) {
 		this.bidId = bidId;
@@ -34,4 +35,12 @@ public class Bid  {
 	public double getBidPrice() {
 		return bidPrice;
 	}
+	
+	public void setIsDeleted(boolean b) {
+		// TODO Auto-generated method stub
+		this.deleted = deleted;
+	}
+	
+	
+	
 }
