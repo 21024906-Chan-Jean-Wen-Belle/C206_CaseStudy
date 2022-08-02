@@ -49,7 +49,7 @@ public class C206_CaseStudy {
 				for (int i = 0; i < useraccList.size(); i++) {
 					
 					if (email.matches(useraccList.get(i).getEmail()) && password.matches(useraccList.get(i).getPassword()) ) {
-						if (useraccList.get(i).getRole().equalsIgnoreCase("Seller")) {
+						if (useraccList.get(i).getRole().equalsIgnoreCase("Seller") ) {
 							C206_CaseStudy.sellerMenu();
 							int s_option = Helper.readInt("Enter option number > ");
 							
@@ -89,12 +89,13 @@ public class C206_CaseStudy {
 								
 							}
 							
-						} else if (useraccList.get(i).getRole().equalsIgnoreCase("Buyer")) {	
+						} else if (useraccList.get(i).getRole().equalsIgnoreCase("Buyer") ){	
 							C206_CaseStudy.buyerMenu();
 								
 							int b_option = Helper.readInt ("Enter option number >");
-								
-							if (option == 1) {
+							
+							
+							if (b_option == 1) {
 								catSubMenu();
 									
 								int cat_option = Helper.readInt("Enter option for category > ");
@@ -106,6 +107,7 @@ public class C206_CaseStudy {
 												
 								else if (cat_option == 2) {
 									// view all cat
+									
 								}
 								
 								else if (cat_option == 3) {
@@ -114,30 +116,31 @@ public class C206_CaseStudy {
 								}
 								
 								
-							} else if (option == 2) {
+							} else if (b_option == 2) {
 								dealSubMenu();			
 								int deal_option = Helper.readInt("Enter option for deal> ");
 								
 								if (deal_option == 1) {
-									// add deals
-									Deal d = inputDeal();
-									C206_CaseStudy.addDeal(dealList, d);
-									System.out.println("New Deal added!");
+								// add deals
+								Deal d = inputDeal();
+								C206_CaseStudy.addDeal(dealList, d);
+								System.out.println("New Deal added!");
 										
 								} else if (deal_option == 2) {
-									// View all deals
+								// View all deals
 									retrieveAllDeal(dealList);
 									viewAllDeals(dealList);
 									
 								} else if (deal_option == 3) {
-									// Delete deals
+								// Delete deals
 									deleteDeal(dealList);
-								
 								}
+								
 							}
 						}
 					}
 				}
+				
 			} else if (y_option == 3) {
 				System.out.println("Thank you for using CAMPUS ONLINE AUCTION SHOP !");
 			}
