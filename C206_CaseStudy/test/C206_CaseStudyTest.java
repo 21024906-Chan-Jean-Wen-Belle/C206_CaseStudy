@@ -23,8 +23,8 @@ public class C206_CaseStudyTest {
 	//-------------------------------------- User Acct------------------------------
 	@Before
 	public void setUpUser() throws Exception {
-		u1 = new User("May Tan", "Test Role", "may@gmail.com", "May Tan 123");
-		u2 = new User("Sam Goh", "Test Role", "sam123@hotmail.com", "Sam likes animals");
+		u1 = new User("May Tan", "Buyer", "may@gmail.com", "May Tan 123");
+		u2 = new User("Sam Goh", "Seller", "sam123@hotmail.com", "Sam likes animals");
 		
 		useraccList = new ArrayList<User>();
 	}
@@ -34,20 +34,57 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	public void testInputUserAccount() {
+	public void testAddUserAccount() {
 		//fail("Not yet implemented"); 
-		assertTrue("C206_CaseStudy_SampleTest ",true);
+		assertNotNull("Check if there is valid User Account arrayList to add to", useraccList);
+		
+		C206_CaseStudy.addUserAccount(useraccList, u1);
+		assertEquals("Check that User Account arraylist size is 1", 1, useraccList.size());
+		assertSame("Check that User Account is added", u1, useraccList.get(0));
+		
+		
+		C206_CaseStudy.addUserAccount(useraccList, u2);
+		assertEquals("Check that User Account arraylist size is 2", 2, useraccList.size());
+		assertSame("Check that User Account is added", u2, useraccList.get(1));
 	}
 	
 	public void testRetrieveAllUserAccount() {
 		assertNotNull("Test if there is a valid User arraylist to retrieve user account", useraccList);
 		
 		String allUserAccount = C206_CaseStudy.retrieveAllUserAccounts(useraccList);
+		String testOutput = "";
+		assertEquals("Test that the retrieved User Account List is empty?", testOutput, allUserAccount);
 		
+		C206_CaseStudy.addUserAccount(useraccList, u1);
+		C206_CaseStudy.addUserAccount(useraccList, u2);
+		assertEquals("Test that User Account arraylist size is 2", 2, useraccList.size());
+		
+		allUserAccount = C206_CaseStudy.retrieveAllUserAccounts(useraccList);
+		testOutput = String.format("%-15s %-15s %-15s %-15s\n", "May Tan", "Test Role", "may@gmail.com", "May Tan 123");
+		testOutput += String.format("%-15s %-15s %-15s %-15s\n", "Sam Goh", "Test Role", "sam123@hotmail.com", "Sam likes animals");
+		
+		assertEquals("Test that viewAllUserAccount", testOutput, allUserAccount);
 	}
 	
 	public void testDoExistUserAccount() {
+		// boundary
+		assertNotNull("Test if there is valid User Account arraylist", useraccList);
 		
+		C206_CaseStudy.addUserAccount(useraccList, u1);
+		
+		// normal
+		Boolean doExist = C206_CaseStudy.doExistUserAccount(useraccList, "may@gmail.com");
+		assertTrue("Test if the User Account exists in the arraylist?", doExist);
+		
+		// error condition
+		doExist = C206_CaseStudy.doExistUserAccount(useraccList, "may@gmail.com");
+		assertFalse("Tests that User Account does not exist", doExist);
+		
+		// error condition
+		C206_CaseStudy.addUserAccount(useraccList, u2);
+		useraccList.remove(1);
+		doExist = C206_CaseStudy.doExistUserAccount(useraccList, "sam123@hotmail.com");
+		assertFalse("Tests that User Account does not exist", doExist);
 	}
 	
 	//------------------------------Deal-----------------------------------
