@@ -109,16 +109,19 @@ for (int i = 0; i < useraccList.size(); i++) {
 
 								if (cat_option == 1) {
 									// add cat
-
+									Category C = inputCategory();
+									C206_CaseStudy.addCategory(catList, C);
+									System.out.println("Category added.");
 								}
 
 								else if (cat_option == 2) {
 									// view all cat
+									C206_CaseStudy.viewAllCategory(catList);
 								}
 
 								else if (cat_option == 3) {
 									// delete cat based on name
-
+									C206_CaseStudy.deleteCategory(catList);
 								}
 
 							} else if (b_option == 2) {
@@ -342,16 +345,72 @@ for (int i = 0; i < useraccList.size(); i++) {
 	// ================================= Option 2 - Category
 	// =================================
 	// input category name
+	
+	private static Category inputCategory() {
+		String catName = Helper.readString("Enter category name > ");
+		
+		Category category = new Category(catName);
+		return category;
+	}
 
 	// add category name
+	
+	public static void addCategory(ArrayList<Category> catList, Category C) {
+		catList.add(C);
+	}
 
 	// retrieve all category
 
+	public static String retrieveAllCategory(ArrayList<Category> catList) {
+		String output = "";
+
+		for (int i = 0; i < catList.size(); i++) {
+			output += String.format("%-10s\n", catList.get(i).getCatName());
+		}
+		return output;
+	}
+	
 	// display category
+	
+	public static void viewAllCategory(ArrayList<Category> catList) {
+		C206_CaseStudy.setHeader("CATEGORY LIST");
+		String output = String.format("%-10s\n", "CATEGORY NAME");
+		output += retrieveAllCategory(catList);
+		System.out.println(output);
+	}
 
 	// find if category name exist
 
+	public static boolean doExistCategory(ArrayList<Category> catList, String input_catName) {
+		boolean doExist = false;
+
+		for (int i = 0; i < catList.size(); i++) {
+			String catName = catList.get(i).getCatName();
+			if (input_catName.equals(catName)) {
+				doExist = true;
+			}
+		}
+		return doExist;
+
+	}
+	
 	// delete category based on name
+	
+	public static void deleteCategory(ArrayList<Category> catList) {
+		String catName = Helper.readString("Enter name for category> ");
+		Boolean doExistCategory = doExistCategory(catList, catName);
+		if (doExistCategory == false) {
+
+			System.out.println("Invalid Category Name");
+		} else {
+			for (int i = 0; i < catList.size(); i++) {
+				if (catName.equals(catList.get(i).getCatName())) {
+					catList.remove(i);
+				}
+			}
+			System.out.println("Category deleted");
+		}
+	}
 
 	// ================================= Option 3 - Item
 	// =================================
