@@ -35,10 +35,6 @@ public class C206_CaseStudyTest {
 		useraccList = new ArrayList<User>();
 	}
 
-	@After
-	public void tearDownUser() throws Exception {
-	}
-
 	@Test
 	public void testAddUserAccount() {
 		// fail("Not yet implemented");
@@ -86,6 +82,13 @@ public class C206_CaseStudyTest {
 		u2.setIsDeleted(true);
 		doExist = C206_CaseStudy.doExistUserAccount(useraccList, "sam123@gmail.com");
 		assertFalse("Test if User Account exist?", doExist);
+	}
+	
+	@After
+	public void tearDownUser() throws Exception {
+		u1 = null;
+		u2 = null;
+		useraccList = null;
 	}
 
 	// ------------------------------Deal-----------------------------------
