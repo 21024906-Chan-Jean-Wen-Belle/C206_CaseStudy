@@ -78,7 +78,6 @@ public class C206_CaseStudyTest {
 		boolean doExist = C206_CaseStudy.doExistUserAccount(useraccList, "may@gmail.com");
 		assertTrue("Test if the User Account exists in the arraylist?", doExist);
 
-		// error condition
 		u2.setIsDeleted(true);
 		doExist = C206_CaseStudy.doExistUserAccount(useraccList, "sam123@gmail.com");
 		assertFalse("Test if User Account exist?", doExist);
