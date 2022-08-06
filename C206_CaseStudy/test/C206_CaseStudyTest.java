@@ -52,7 +52,8 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that User Account arraylist size is 2", 2, useraccList.size());
 		assertSame("Check that User Account is added", u2, useraccList.get(1));
 	}
-
+	
+	@Test
 	public void testRetrieveAllUserAccount() {
 		assertNotNull("Test if there is a valid User arraylist to retrieve user account", useraccList);
 
@@ -69,9 +70,10 @@ public class C206_CaseStudyTest {
 		testOutput += String.format("%-15s %-15s %-15s %-15s\n", "Sam Goh", "Seller", "sam123@hotmail.com",
 				"Sam likes animals");
 
-		assertEquals("Test that viewAllUserAccount", testOutput, allUserAccount);
+		assertEquals("Test that useraccList size is 2", 2, useraccList.size());
 	}
-
+	
+	@Test
 	public void testDoExistUserAccount() {
 		// boundary
 		assertNotNull("Test if there is valid User Account arraylist", useraccList);
@@ -79,18 +81,13 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addUserAccount(useraccList, u1); 
 		
 		// normal
-		Boolean doExist = C206_CaseStudy.doExistUserAccount(useraccList, "may@gmail.com");
+		boolean doExist = C206_CaseStudy.doExistUserAccount(useraccList, "may@gmail.com");
 		assertTrue("Test if the User Account exists in the arraylist?", doExist);
 
 		// error condition
-		doExist = C206_CaseStudy.doExistUserAccount(useraccList, "may@gmail.com");
-		assertFalse("Tests that User Account does not exist", doExist);
-
-		// error condition
-		C206_CaseStudy.addUserAccount(useraccList, u2);
-		useraccList.remove(1);
-		doExist = C206_CaseStudy.doExistUserAccount(useraccList, "sam123@hotmail.com");
-		assertFalse("Tests that User Account does not exist", doExist);
+		u2.setIsDeleted(true);
+		doExist = C206_CaseStudy.doExistUserAccount(useraccList, "sam123@gmail.com");
+		assertFalse("Test if User Account exist?", doExist);
 	}
 
 	// ------------------------------Deal-----------------------------------
