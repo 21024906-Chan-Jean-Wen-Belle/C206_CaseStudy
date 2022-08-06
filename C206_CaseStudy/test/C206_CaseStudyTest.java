@@ -69,8 +69,6 @@ public class C206_CaseStudyTest {
 		testOutput = String.format("%-15s %-15s %-15s %-15s\n", "May Tan", "Buyer", "may@gmail.com", "May Tan 123");
 		testOutput += String.format("%-15s %-15s %-15s %-15s\n", "Sam Goh", "Seller", "sam123@hotmail.com",
 				"Sam likes animals");
-
-		assertEquals("Test that useraccList size is 2", 2, useraccList.size());
 	}
 	
 	@Test
