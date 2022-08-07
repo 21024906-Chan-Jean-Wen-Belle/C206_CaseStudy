@@ -1,4 +1,3 @@
-
 public class Item {
 	private String name;
 	private String description;
@@ -16,8 +15,7 @@ public class Item {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.increment = increment ;
-		this.deleted = false;
-
+		this.deleted = false ;
 	}
 
 
@@ -49,10 +47,16 @@ public class Item {
 	public double getIncrement() {
 		return increment;
 	}
-	
-	public void setIsDeleted(boolean b) {
+	public void setIsDeleted(boolean deleted) {
 		this.deleted = deleted ;
-		
+	}
+	
+	
+	public String toString() {
+		String item = String.format("%-10s %-20s %-30s %-30s %-20s %-20s", "NAME", "DESCRIPTION ",
+				 "MIN BID PRICE", "AUCTION START DATE","AUCTION END DATE", "BID INCREMENT");
+		return item;
+
 	}
 
 }
